@@ -1,14 +1,19 @@
-import { NavLink } from "react-bootstrap"
-import Navbar from 'react-bootstrap/Navbar';
+import React from "react";
+import Nav from "react-bootstrap/Nav";
+import { Link } from "react-router-dom";
 
-function Nav(){
+const Navbar = () => {
     return (
-        <Navbar className="navbar">
-           <NavLink to="/">Restuarants</NavLink>    
-           <NavLink to="/cart">Cart</NavLink> 
-           <hr></hr>
-        </Navbar>    
-    )
+        <Nav className="justify-content-center">
+           <Nav.Item>
+                <Link to="/" className="nav-link">Restaurants</Link>    
+            </Nav.Item>
+           <Nav.Item>
+                <Link to="/cart" className="nav-link">Cart</Link> 
+           </Nav.Item>
+           <hr></hr>  
+        </Nav>  
+    );
 }
 
-export default Nav
+export default Navbar
