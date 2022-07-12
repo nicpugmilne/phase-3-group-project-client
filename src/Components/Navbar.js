@@ -5,6 +5,7 @@ function NavBar(){
         <div className="navbar">
            <NavLink to="/">Restuarants</NavLink>    
            <NavLink to="/cart">Cart</NavLink> 
+           <hr></hr>
         </div>    
     )
 }
