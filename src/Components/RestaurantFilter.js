@@ -1,21 +1,25 @@
-function RestaurantFilter(){
+function RestaurantFilter({handlePriceFilter, handleCuisineFilter, handleRatingFilter}){
+
+    
    return(
         <div>
             <div>
                 <h4>Filter By Cuisine</h4>
-            <select name="type" id="cuisine" aria-label="cuisine">
-                <option value="all">All</option>
-                <option value="American">American</option>
-                <option value="Indian">Indian</option>
-                <option value="Italian">Italian</option>
-                <option value="Mexican">Mexican</option>
-                <option value="Thai">Thai</option>
+            <select name="type" id="cuisine" aria-label="cuisine"
+                onChange={(e)=> handleCuisineFilter(e.target.value)}>
+                <option value="All">All</option>
+                <option value="4">American</option>
+                <option value="3">Indian</option>
+                <option value="1">Italian</option>
+                <option value="2">Mexican</option>
+                <option value="5">Thai</option>
             </select>
             </div>
             <div>
                 <h4>Filter By Price</h4>
-            <select id="price"  aria-label="price">
-                <option value="all">All</option>
+            <select id="price"  aria-label="price"
+                onChange={(e)=> handlePriceFilter(e.target.value)}>
+                <option value="All">All</option>
                 <option value="1">$</option>
                 <option value="2">$$</option>
                 <option value="3">$$$</option>
@@ -25,8 +29,9 @@ function RestaurantFilter(){
             </div>
             <div>
                 <h4>Filter By Rating</h4>
-            <select id="rating" aria-label="rating">
-                <option value="all">All</option>
+            <select id="rating" aria-label="rating"
+                onChange={(e)=>handleRatingFilter(e.target.value)}>
+                <option value="All">All</option>
                 <option value="1">★</option>
                 <option value="2">★★</option>
                 <option value="3">★★★</option>

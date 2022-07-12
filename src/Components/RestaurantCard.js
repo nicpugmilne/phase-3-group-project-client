@@ -7,6 +7,7 @@ function RestaurantCard({restaurant, onRestaurantClick}){
                 className="restaurantCardImage"
                 src={restaurant.display_image_url}
                 width="300px"
+                alt ="restaurant"
                 ></img>
             <h1>{restaurant.name}</h1>
             <p>Rating: {restaurant.rating}</p>

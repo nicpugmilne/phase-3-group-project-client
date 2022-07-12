@@ -1,18 +1,28 @@
 import MenuCard from "./MenuCard"
 import { useState, useEffect } from "react"
 
-function MenuList({restaurantId}){
-    const [menu, setMenu] = useState([]);
+function MenuList({menuId}){
+    const [menuList, setMenuList] = useState([]);
 
-
+   
     useEffect(() =>{
-        fetch('http://localhost:9292/restaurants/${restaurantId}/menu')
+        fetch(`http://localhost:9292/restaurants/${menuId}/menu`)
         .then(res => res.json())
-        .then((menu) => setMenu(menu))
-      }, [restaurantId])
+        .then((menuList) => setMenuList(menuList))
+      }, [menuId])
+
+    const menuCollection = menuList.map((menu)=>(
+        <MenuCard
+        key={menu.item.id}
+        name={menu.item.name}
+        image={menu.item.item_image_url}
+        price={menu.price}
+        />
+        ))
 
      return(
         <div>
+            {menuCollection}
             <h1 className="specials">Specials</h1>
             <h1 className="appetizers">Appetizers</h1>
             <h1 className="main">Main Courses</h1>

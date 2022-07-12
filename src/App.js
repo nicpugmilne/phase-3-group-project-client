@@ -18,6 +18,7 @@ function App() {
   const [menuSelection, setMenuSelection] = useState({});
   const [cuisineFilter, setCuisineFilter] = useState("All");
   const [priceFilter, setPriceFilter] = useState("All");
+  const [ratingFilter, setRatingFilter] = useState("All");
   const [menuView, setMenuView] = useState(false);
   
   useEffect(() => {
@@ -30,8 +31,9 @@ function App() {
   function onRestaurantClick(e, restaurant){
     setMenuView(true)
     setMenuSelection(restaurant)
-    console.log(menuSelection)
   }
+
+  let menuId = menuSelection.id
 
   function onGoBack(){
     setMenuView(false)
@@ -41,22 +43,32 @@ function App() {
 
 function handleCuisineFilter(cuisineFilter){
   setCuisineFilter(cuisineFilter)
+  console.log(cuisineFilter)
 }
 
 function handlePriceFilter(priceFilter){
   setPriceFilter(priceFilter)
 }
+function handleRatingFilter(ratingFilter){
+  setRatingFilter(ratingFilter)
+}
+
 
   const restaurantsToDisplay = restaurants
     .filter((restaurant) => {
       if (cuisineFilter === "All") return true;
-      return restaurant.cuisine_id === cuisineFilter;
+      return restaurant.cuisine_id === parseInt(cuisineFilter);
     })
     .filter((restaurant) => {
       if (priceFilter === "All") return true;
-      return restaurant.price_guage === priceFilter;
+      return restaurant.price_gauge === parseInt(priceFilter);
     })
+    .filter((restaurant) => {
+      if (ratingFilter === "All") return true;
+      return restaurant.rating === parseInt(ratingFilter);
+      })
 
+      
   return (
     <div className="App">
      <Header />
@@ -65,12 +77,15 @@ function handlePriceFilter(priceFilter){
         <Route path="/">
           {menuView ?(
             <div>
-              <MenuFilter restaurantId={menuSelection} onGoBack={onGoBack}/>
-              <MenuList/>
+              <MenuFilter  onGoBack={onGoBack}/>
+              <MenuList menuId={menuId}/>
             </div>
           ): (
             <div className="restaurantPage">
-            <RestaurantFilter />
+            <RestaurantFilter
+                handlePriceFilter={handlePriceFilter}
+                handleCuisineFilter={handleCuisineFilter}
+                handleRatingFilter={handleRatingFilter} />
             <RestaurantList 
                 restaurantsToDisplay={restaurantsToDisplay}
                 onRestaurantClick={onRestaurantClick}/>
