@@ -1,5 +1,6 @@
 import MenuCard from "./MenuCard"
 import { useState, useEffect } from "react"
+import Row from 'react-bootstrap/Row';
 
 function MenuList({menuId}){
     const [menuList, setMenuList] = useState([]);
@@ -95,17 +96,17 @@ function MenuList({menuId}){
      return(
         <div>
             <h1 className="specials">Specials</h1>
-            {/* {specialCollection} */}
+                {/* {specialCollection} */}
             <h1 className="appetizers">Appetizers</h1>
-            {appCollection}
+                <Row className="cardGrid">{appCollection}</Row>
             <h1 className="main">Main Courses</h1>
-            {mainCollection}
+                <Row className="cardGrid">{mainCollection}</Row>
             <h1 className="sides">Side Dishes</h1>
-            {sideCollection}
+                <Row className="cardGrid">{sideCollection}</Row>
             <h1 className="desserts">Desserts</h1>
-            {dessertCollection}
+                <Row className="cardGrid">{dessertCollection}</Row>
             <h1 className="Drinks">Drinks</h1>
-            {drinkCollection}
+                <Row className="cardGrid">{drinkCollection}</Row>
         </div>
     )
 }

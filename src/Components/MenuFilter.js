@@ -1,3 +1,5 @@
+import Button from 'react-bootstrap/Button';
+
 function MenuFilter({onGoBack}){
     return(
         <div>
@@ -10,7 +12,7 @@ function MenuFilter({onGoBack}){
                 <option value="4">Dessert</option>
                 <option value="5">Drinks</option>
             </select>
-            <button type="button"className="btn" onClick={onGoBack}>Back To Restaurants</button>
+            <Button type="button"className="btn" onClick={onGoBack}>Back To Restaurants</Button>
         </div>
     )
 }
