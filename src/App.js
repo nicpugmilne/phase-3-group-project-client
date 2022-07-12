@@ -2,8 +2,8 @@
 import './App.css';
 import { Route, Switch} from "react-router-dom";
 import { useState, useEffect} from "react"
-// import "bootstrap/dist/css/bootstrap.min.css";
-import NavBar from './Components/Navbar';
+import "bootstrap/dist/css/bootstrap.min.css";
+import Nav from './Components/Navbar';
 import Header from './Components/Header';
 import MenuList from './Components/MenuList';
 import MenuFilter from './Components/MenuFilter';
@@ -72,7 +72,7 @@ function handleRatingFilter(ratingFilter){
   return (
     <div className="App">
      <Header />
-     <NavBar />
+     <Nav />
      <Switch>
         <Route path="/">
           {menuView ?(

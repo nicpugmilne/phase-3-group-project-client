@@ -1,4 +1,5 @@
 import RestaurantCard from "./RestaurantCard"
+import Row from 'react-bootstrap/Row';
 
 
 function RestaurantList({restaurantsToDisplay, onRestaurantClick}){
@@ -14,9 +15,9 @@ function RestaurantList({restaurantsToDisplay, onRestaurantClick}){
    
 
     return(
-        <div>
+        <Row className="cardGrid">
            {restaurantCollection}
-        </div>
+        </Row>
     )
 }
 

@@ -1,13 +1,14 @@
 import { NavLink } from "react-bootstrap"
+import Navbar from 'react-bootstrap/Navbar';
 
-function NavBar(){
+function Nav(){
     return (
-        <div className="navbar">
+        <Navbar className="navbar">
            <NavLink to="/">Restuarants</NavLink>    
            <NavLink to="/cart">Cart</NavLink> 
            <hr></hr>
-        </div>    
+        </Navbar>    
     )
 }
 
-export default NavBar
+export default Nav

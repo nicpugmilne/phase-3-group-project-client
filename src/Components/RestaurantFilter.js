@@ -1,10 +1,20 @@
+import Dropdown from 'react-bootstrap/Dropdown';
+
 function RestaurantFilter({handlePriceFilter, handleCuisineFilter, handleRatingFilter}){
 
-    
    return(
         <div>
             <div>
                 <h4>Filter By Cuisine</h4>
+                <Dropdown onChange={(e)=> handleCuisineFilter(e.target.value)}>
+                    <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                        Filter By Cuisine
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu > 
+                        <Dropdown.Item value="All">All</Dropdown.Item>
+                        <Dropdown.Item value="4">American</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
             <select name="type" id="cuisine" aria-label="cuisine"
                 onChange={(e)=> handleCuisineFilter(e.target.value)}>
                 <option value="All">All</option>
