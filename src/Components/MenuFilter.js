@@ -1,4 +1,4 @@
-function MenuFilter(){
+function MenuFilter({onGoBack}){
     return(
         <div>
             <h2>Filter By Category</h2>
@@ -10,6 +10,7 @@ function MenuFilter(){
                 <option value="4">Dessert</option>
                 <option value="5">Drinks</option>
             </select>
+            <button type="button"className="btn" onClick={onGoBack}>Back To Restaurants</button>
         </div>
     )
 }
