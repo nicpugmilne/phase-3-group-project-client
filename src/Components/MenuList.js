@@ -2,7 +2,7 @@ import MenuCard from "./MenuCard"
 import { useState, useEffect } from "react"
 import Row from 'react-bootstrap/Row';
 
-function MenuList({menuId}){
+function MenuList({menuId, onAddCartClick}){
     const [menuList, setMenuList] = useState([]);
 
     useEffect(() =>{
@@ -26,10 +26,13 @@ function MenuList({menuId}){
         .map((menu)=>(
             <MenuCard
             key={menu.item.id}
+            id={menu.item.id}
             name={menu.item.name}
             image={menu.item.item_image_url}
             price={menu.price}
             category={menu.item.category_id}
+            menuitem={menu.item}
+            onAddCartClick={onAddCartClick}
             />
             ))
 
@@ -38,10 +41,13 @@ function MenuList({menuId}){
         .map((menu)=>(
         <MenuCard
         key={menu.item.id}
+        id={menu.item.id}
         name={menu.item.name}
         image={menu.item.item_image_url}
         price={menu.price}
         category={menu.item.category_id}
+        menuitem={menu.item}
+        onAddCartClick={onAddCartClick}
         />
         ))
 
@@ -50,10 +56,13 @@ function MenuList({menuId}){
         .map((menu)=>(
         <MenuCard
         key={menu.item.id}
+        id={menu.item.id}
         name={menu.item.name}
         image={menu.item.item_image_url}
         price={menu.price}
         category={menu.item.category_id}
+        menuitem={menu.item}
+        onAddCartClick={onAddCartClick}
     />
     ))
 
@@ -62,10 +71,13 @@ function MenuList({menuId}){
         .map((menu)=>(
         <MenuCard
         key={menu.item.id}
+        id={menu.item.id}
         name={menu.item.name}
         image={menu.item.item_image_url}
         price={menu.price}
         category={menu.item.category_id}
+        menuitem={menu.item}
+        onAddCartClick={onAddCartClick}
     />
     ))
 
@@ -74,10 +86,13 @@ function MenuList({menuId}){
         .map((menu)=>(
         <MenuCard
         key={menu.item.id}
+        id={menu.item.id}
         name={menu.item.name}
         image={menu.item.item_image_url}
         price={menu.price}
         category={menu.item.category_id}
+        menuitem={menu.item}
+        onAddCartClick={onAddCartClick}
     />
     ))
 
@@ -86,17 +101,20 @@ function MenuList({menuId}){
         .map((menu)=>(
         <MenuCard
         key={menu.item.id}
+        id={menu.item.id}
         name={menu.item.name}
         image={menu.item.item_image_url}
         price={menu.price}
         category={menu.item.category_id}
+        menuitem={menu.item}
+        onAddCartClick={onAddCartClick}
     />
     ))
 
      return(
         <div>
             <h1 className="specials">Specials</h1>
-                {specialCollection}
+            <Row className="cardGrid">{specialCollection}</Row>
             <h1 className="appetizers">Appetizers</h1>
                 <Row className="cardGrid">{appCollection}</Row>
             <h1 className="main">Main Courses</h1>
