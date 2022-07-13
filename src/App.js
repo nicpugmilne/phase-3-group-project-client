@@ -20,7 +20,7 @@ function App() {
   const [ratingFilter, setRatingFilter] = useState("All");
   const [menuView, setMenuView] = useState(false);
   const [orders, setOrders] = useState([]);
-  const [orderedItems, setOrderedItems] = useState([]);
+  // // const [orderedItems, setOrderedItems] = useState([]);
   const [cart, setCart] = useState([]);
   const [cartList, setCartList] = useState([]);
 
@@ -42,11 +42,11 @@ function App() {
     .then((orders) => setOrders(orders))
   }, [])
 
-  useEffect(() => {
-    fetch('http://localhost:9292/ordered_items')
-    .then(res => res.json())
-    .then((orderedItems) => setOrderedItems(orderedItems))
-  }, [])
+  // useEffect(() => {
+  //   fetch('http://localhost:9292/ordered_items')
+  //   .then(res => res.json())
+  //   .then((orderedItems) => setOrderedItems(orderedItems))
+  // }, [])
 
 
 //Menu back and forth
@@ -95,7 +95,7 @@ function handleCategoryFilter(categoryFilter){
 
 //Cart
 
-function addToCart(e, id){
+function addToCart(e, id, price){
 
   function addCart(newItem){
     setCart([...cart, newItem])
@@ -106,6 +106,7 @@ function addToCart(e, id){
   const itemData = {
     order_id: order_id,
     menu_item_id: menu_item_id,
+    price: price
   }
     
   fetch("http://localhost:9292/items/new",{

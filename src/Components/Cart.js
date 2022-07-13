@@ -14,6 +14,7 @@ function Cart({cartList}){
             name={item.item.name}
             image={item.item.item_image_url}
             quantity={item.quantity}
+            price={item.price}
         />
     ))
 
@@ -46,8 +47,8 @@ function Cart({cartList}){
             <Stack gap={4} className="col-md-5 mx-auto">
                 {items}
                 <Stack direction="horizontal" gap={4} className="justify-content-center">
-                    <Button name="cancel" variant="outline-danger" onClick={cancelOrder}>Cancel Order</Button>
-                    <Button name="complete" variant="success" onClick={completeOrder}>Complete Order</Button>
+                    <Button name="cancel" variant="outline-danger" >Cancel Order</Button>
+                    <Button name="complete" variant="success" >Complete Order</Button>
                 </Stack>
             </Stack>
         </Container>
