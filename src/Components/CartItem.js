@@ -1,19 +1,18 @@
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Container from 'react-bootstrap/Container';
 
-function CartItem() {
+
+
+function CartItem({name, image, quantity}) {
   return (
-    <Container>
-        <ListGroup.Item> First item being ordered!
-            <ButtonGroup>
-                <Button>-</Button>
-                <Button>Quantity</Button>
-                <Button>+</Button>
-            </ButtonGroup>
-        </ListGroup.Item>
-    </Container>
+      <ListGroup.Item> {name}
+          <ButtonGroup>
+              <Button><i class="fa fa-minus"></i></Button>
+              <Button>{quantity} <i class="bi bi-cart3"></i></Button>
+              <Button><i class="fa fa-plus"></i></Button>
+          </ButtonGroup>
+      </ListGroup.Item>
   );
 }
 
