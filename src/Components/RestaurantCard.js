@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Ratings from 'react-ratings-declarative';
 
 function RestaurantCard({restaurant, onRestaurantClick}){
 
@@ -18,11 +19,36 @@ function RestaurantCard({restaurant, onRestaurantClick}){
             <h2>{restaurant.name}</h2>
             <Container>
                 <Row>
-                    <Col>Rating: {restaurant.rating}</Col>
-                    <Col>Price: {restaurant.price_gauge}</Col>
+                    <Col><b>Rating: </b>
+                    <Ratings 
+                        rating={restaurant.rating} 
+                        widgetRatedColors="blue"  
+                        widgetDimensions="15px"
+                        widgetSpacings="4px">
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                    </Ratings>
+                    </Col>
+                    <Col><b>Price:</b> 
+                    <Ratings 
+                        rating={restaurant.price_gauge}
+                        typeOfWidget = "dollar"
+                        widgetRatedColors="blue"  
+                        widgetDimensions="15px"
+                        widgetSpacings="4px">
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                    </Ratings>
+                    </Col>
                 </Row>
             </Container>
-            <p>Delivery Time: {restaurant.delivery_time}min</p>
+            <p><b>Delivery Time: </b>{restaurant.delivery_time}min</p>
              <Button width="100%" className="btn" onClick={(e) => onRestaurantClick(e, restaurant)}>Menu</Button>
             
             
