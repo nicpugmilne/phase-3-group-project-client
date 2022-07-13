@@ -18,6 +18,7 @@ function App() {
   const [menuSelection, setMenuSelection] = useState({});
   const [cuisineFilter, setCuisineFilter] = useState("All");
   const [priceFilter, setPriceFilter] = useState("All");
+  const [categoryFilter, setCategoryFilter] = useState("All");
   const [ratingFilter, setRatingFilter] = useState("All");
   const [menuView, setMenuView] = useState(false);
   
@@ -53,6 +54,10 @@ function handleRatingFilter(ratingFilter){
   setRatingFilter(ratingFilter)
 }
 
+function handleCategoryFilter(categoryFilter){
+  setCategoryFilter(categoryFilter)
+}
+
 
   const restaurantsToDisplay = restaurants
     .filter((restaurant) => {
@@ -77,7 +82,7 @@ function handleRatingFilter(ratingFilter){
         <Route exact path="/">
           {menuView ?(
             <div>
-              <MenuFilter  onGoBack={onGoBack}/>
+              <MenuFilter  onGoBack={onGoBack} handleCategoryFilter={handleCategoryFilter}/>
               <MenuList menuId={menuId}/>
             </div>
           ): (

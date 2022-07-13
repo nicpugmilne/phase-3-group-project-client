@@ -21,17 +21,17 @@ function MenuList({menuId}){
     //     />
     //     ))
 
-    // const specialCollection = menuList
-    //     .filter((menu) => (menu.is_special === true))
-    //     .map((menu)=>(
-    //         <MenuCard
-    //         key={menu.item.id}
-    //         name={menu.item.name}
-    //         image={menu.item.item_image_url}
-    //         price={menu.price}
-    //         category={menu.item.category_id}
-    //         />
-    //         ))
+    const specialCollection = menuList
+        .filter((menu) => (menu.is_special === true))
+        .map((menu)=>(
+            <MenuCard
+            key={menu.item.id}
+            name={menu.item.name}
+            image={menu.item.item_image_url}
+            price={menu.price}
+            category={menu.item.category_id}
+            />
+            ))
 
     const appCollection = menuList
         .filter((menu) => (menu.item.category_id === 1))
@@ -96,7 +96,7 @@ function MenuList({menuId}){
      return(
         <div>
             <h1 className="specials">Specials</h1>
-                {/* {specialCollection} */}
+                {specialCollection}
             <h1 className="appetizers">Appetizers</h1>
                 <Row className="cardGrid">{appCollection}</Row>
             <h1 className="main">Main Courses</h1>
