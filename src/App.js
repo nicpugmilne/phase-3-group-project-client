@@ -97,22 +97,17 @@ function handleCategoryFilter(categoryFilter){
 //Cart
 
 console.log(currentOrderId)
-function addToCart(id, restaurantId){
 
-  // function addCart(newItem){
-  //   setCart([...cart, newItem])
-  // }
+function addToCart(id, restaurantId){
   const itemData = {
     order_id: currentOrderId,
     menu_item_id: id,
   }
-
   const orderData = {
     restaurant_id: restaurantId
   }
 
-  if (currentOrderId.length == 0){
-    // no current order, so we need to first create a new order then add the item to cart
+  function createNewOrder(){
     fetch("http://localhost:9292/orders/new", {
       method: "POST",
       headers: {
@@ -121,29 +116,30 @@ function addToCart(id, restaurantId){
        body: JSON.stringify(orderData)
     })
     .then((r) => r.json())
-    .then((order) =>  console.log(order))
+    .then((order) =>  setCurrentOrderId(order.id))
+  }
+  
+  function createNewItem(){
+    fetch("http://localhost:9292/items/new",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+       },
+       body: JSON.stringify({    order_id: currentOrderId,
+        menu_item_id: id})
+    })
+    .then((r) => r.json())
+    .then((newItem) =>  console.log(newItem))
+  }
 
-    fetch("http://localhost:9292/items/new",{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-       },
-       body: JSON.stringify(itemData)
-    })
-    .then((r) => r.json())
-    .then((newItem) =>  console.log(newItem))
+  if (currentOrderId.length == 0){
+    // no current order, so we need to first create a new order then add the item to cart
+    createNewOrder()
+    createNewItem()
   } else {
-    // if an order already is open we just need to add the item to the existing order
-    fetch("http://localhost:9292/items/new",{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-       },
-       body: JSON.stringify(itemData)
-    })
-    .then((r) => r.json())
-    .then((newItem) =>  console.log(newItem))
-  }   
+ // if an order already is open we just need to add the item to the existing order
+    createNewItem()
+  }
 }
 
   return (
