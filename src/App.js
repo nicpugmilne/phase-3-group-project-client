@@ -21,7 +21,7 @@ function App() {
   const [menuView, setMenuView] = useState(false);
   const [currentOrderId, setCurrentOrderId] = useState([]);
   // // const [orderedItems, setOrderedItems] = useState([]);
-  const [cart, setCart] = useState([]);
+  // const [cart, setCart] = useState([]);
   const [cartList, setCartList] = useState([]);
 
   useEffect(() =>{
@@ -94,8 +94,8 @@ function handleCategoryFilter(categoryFilter){
       return restaurant.rating === parseInt(ratingFilter);
       })
 
-//Cart
 
+//Cart
 console.log(currentOrderId)
 
 function addToCart(id, restaurantId){
@@ -105,6 +105,10 @@ function addToCart(id, restaurantId){
   }
   const orderData = {
     restaurant_id: restaurantId
+  }
+  
+  function addCart(newItem){
+    setCartList([...cartList, newItem])
   }
 
   function createNewOrder(){
@@ -142,6 +146,12 @@ function addToCart(id, restaurantId){
   }
 }
 
+//Delete  
+function handleDeleteItem(itemToDelete){
+  const updatedCart = cartList.filter((item) => item.id !== itemToDelete.id)
+  setCartList(updatedCart)
+}
+
   return (
     <div className="App">
      <Header />
@@ -151,7 +161,7 @@ function addToCart(id, restaurantId){
           {menuView ?(
             <div>
               <MenuFilter  onGoBack={onGoBack} handleCategoryFilter={handleCategoryFilter}/>
-              <MenuList menuId={menuId} onAddCartClick={addToCart}/>
+              <MenuList menuId={menuId} onAddCartClick={addToCart}  />
             </div>
           ): (
             <div className="restaurantPage">
@@ -166,7 +176,7 @@ function addToCart(id, restaurantId){
             )}
         </Route>
         <Route exact path="/cart">
-          <Cart cartList={cartList} currentOrderId={currentOrderId}/>
+          <Cart cartList={cartList} currentOrderId={currentOrderId} handleDeleteItem={handleDeleteItem}/>
         </Route>
      </Switch>
     </div>
