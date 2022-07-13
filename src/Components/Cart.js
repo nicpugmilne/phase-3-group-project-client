@@ -4,8 +4,9 @@ import { useState, useEffect } from "react"
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button';
 
-function Cart({cartList}){
+function Cart({cartList, handleDeleteItem}){
 
+    console.log(cartList)
     const items = cartList.map((item)=>(
         <CartItem
             key={item.id}
@@ -15,6 +16,7 @@ function Cart({cartList}){
             image={item.item.item_image_url}
             quantity={item.quantity}
             price={item.price}
+            handleDeleteItem={handleDeleteItem}
         />
     ))
 

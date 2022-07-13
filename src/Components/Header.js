@@ -4,7 +4,7 @@ function Header(){
     return(
         <div className="header">
             <Row> 
-                <h1>Name of the site goes here!</h1>
+                <h1 className="title">Exquisite Edibles</h1>
                 <h1><i class="fa fa-shopping-cart"></i></h1>
             </Row>
         </div>
