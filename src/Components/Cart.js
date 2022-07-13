@@ -1,31 +1,55 @@
 import CartItem from './CartItem';
 import Container from 'react-bootstrap/Container';
-import { ListGroup } from 'react-bootstrap';
 import { useState, useEffect } from "react"
+import Stack from 'react-bootstrap/Stack'
+import Button from 'react-bootstrap/Button';
 
-function Cart(){
-    const [cartList, setCartList] = useState([]);
+function Cart({cartList}){
 
-    useEffect(() =>{
-        fetch(`http://localhost:9292/ordered_items`)
-        .then(res => res.json())
-        .then((items) => setCartList(items))
-      }, [])
+    const items = cartList.map((item)=>(
+        <CartItem
+            key={item.id}
+            id={item.id}
+            orderId={item.order_id}
+            name={item.item.name}
+            image={item.item.item_image_url}
+            quantity={item.quantity}
+        />
+    ))
 
-      const items = cartList.map((item)=>(
-      <CartItem
-      key={item.id}
-      name={item.item.name}
-      image={item.item.item_image_url}
-      quantity={item.item.quantity}
-  />
-  ))
+//Need to work on getting the orderId in order for these two functions to work
+
+    // function cancelOrder(orderId){
+    //     fetch(`http://localhost:9292/orders/${orderId}/delete`, {
+    //         method: "DELETE",
+    //       })
+    //         .then((r) => r.json())
+    //         .then((item) => console.log(item));
+    // }
+
+    // function completeOrder(orderId){
+    //     fetch(`http://localhost:9292/orders/${orderId}/complete`, {
+    //         method: "PATCH",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //           is_completed: true
+    //         }),
+    //       })
+    //         .then((r) => r.json())
+    //         .then((updatedItem) => console.log(updatedItem));
+    // }
       
     return (
-        <Container>
-            <ListGroup variant="flush">
+        <Container className='mt-4'>
+            <Stack gap={4} className="col-md-5 mx-auto">
                 {items}
-            </ListGroup>
+                <Stack direction="horizontal" gap={4} className="justify-content-center">
+                    <Button name="cancel" variant="outline-danger" onClick={cancelOrder}>Cancel Order</Button>
+                    <Button name="complete" variant="success" onClick={completeOrder}>Complete Order</Button>
+                </Stack>
+            </Stack>
         </Container>
         )
     }

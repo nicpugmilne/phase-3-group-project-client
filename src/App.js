@@ -11,8 +11,6 @@ import RestaurantList from './Components/RestaurantList';
 import RestaurantFilter from './Components/RestaurantFilter';
 import Cart from './Components/Cart';
 
-
-
 function App() {
   const [restaurants, setRestaurants] = useState([]);
   const [menuSelection, setMenuSelection] = useState({});
@@ -20,6 +18,13 @@ function App() {
   const [priceFilter, setPriceFilter] = useState("All");
   const [ratingFilter, setRatingFilter] = useState("All");
   const [menuView, setMenuView] = useState(false);
+  const [cartList, setCartList] = useState([]);
+
+  useEffect(() =>{
+      fetch(`http://localhost:9292/ordered_items`)
+      .then(res => res.json())
+      .then((items) => setCartList(items))
+    }, [])
   
   useEffect(() => {
     fetch('http://localhost:9292/restaurants')
@@ -93,7 +98,7 @@ function handleRatingFilter(ratingFilter){
             )}
         </Route>
         <Route exact path="/cart">
-          <Cart />
+          <Cart cartList={cartList}/>
         </Route>
      </Switch>
     </div>

@@ -71,3 +71,8 @@
 .btn{
   padding: 10px;
 }
+
+.cart-images{
+  max-width: 7vh;
+  max-height: 5vh;
+}
