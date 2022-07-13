@@ -16,8 +16,12 @@ function App() {
   const [menuSelection, setMenuSelection] = useState({});
   const [cuisineFilter, setCuisineFilter] = useState("All");
   const [priceFilter, setPriceFilter] = useState("All");
+  const [categoryFilter, setCategoryFilter] = useState("All");
   const [ratingFilter, setRatingFilter] = useState("All");
   const [menuView, setMenuView] = useState(false);
+  const [orders, setOrders] = useState([]);
+  const [orderedItems, setOrderedItems] = useState([]);
+  const [cart, setCart] = useState([]);
   const [cartList, setCartList] = useState([]);
 
   useEffect(() =>{
@@ -32,7 +36,20 @@ function App() {
     .then((restaurants) => setRestaurants(restaurants))
   }, [])
 
+  useEffect(() => {
+    fetch('http://localhost:9292/orders')
+    .then(res => res.json())
+    .then((orders) => setOrders(orders))
+  }, [])
 
+  useEffect(() => {
+    fetch('http://localhost:9292/ordered_items')
+    .then(res => res.json())
+    .then((orderedItems) => setOrderedItems(orderedItems))
+  }, [])
+
+
+//Menu back and forth
   function onRestaurantClick(e, restaurant){
     setMenuView(true)
     setMenuSelection(restaurant)
@@ -58,6 +75,9 @@ function handleRatingFilter(ratingFilter){
   setRatingFilter(ratingFilter)
 }
 
+function handleCategoryFilter(categoryFilter){
+  setCategoryFilter(categoryFilter)
+}
 
   const restaurantsToDisplay = restaurants
     .filter((restaurant) => {
@@ -73,7 +93,34 @@ function handleRatingFilter(ratingFilter){
       return restaurant.rating === parseInt(ratingFilter);
       })
 
-      
+//Cart
+
+function addToCart(e, id){
+
+  function addCart(newItem){
+    setCart([...cart, newItem])
+  }
+  const order_id = 1
+  const menu_item_id = id
+
+  const itemData = {
+    order_id: order_id,
+    menu_item_id: menu_item_id,
+  }
+    
+  fetch("http://localhost:9292/items/new",{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+     },
+     body: JSON.stringify(itemData)
+  })
+  .then((r) => r.json())
+  .then((newItem) =>  addCart(newItem))
+}
+
+  console.log(cart)
+
   return (
     <div className="App">
      <Header />
@@ -82,8 +129,8 @@ function handleRatingFilter(ratingFilter){
         <Route exact path="/">
           {menuView ?(
             <div>
-              <MenuFilter  onGoBack={onGoBack}/>
-              <MenuList menuId={menuId}/>
+              <MenuFilter  onGoBack={onGoBack} handleCategoryFilter={handleCategoryFilter}/>
+              <MenuList menuId={menuId} onAddCartClick={addToCart}/>
             </div>
           ): (
             <div className="restaurantPage">
