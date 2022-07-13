@@ -42,7 +42,6 @@ function CartItem({id, name, image, quantity, orderId, price, setCartList, handl
       .then((item) => handleDeleteItem(item));
   }
 
-
   return (
     <Stack direction="horizontal" gap={5} className="justify-content-center">         
       <div>

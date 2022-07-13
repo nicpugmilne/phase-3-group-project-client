@@ -19,7 +19,7 @@ function App() {
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [ratingFilter, setRatingFilter] = useState("All");
   const [menuView, setMenuView] = useState(false);
-  const [orders, setOrders] = useState([]);
+  const [currentOrderId, setCurrentOrderId] = useState([]);
   // // const [orderedItems, setOrderedItems] = useState([]);
   // const [cart, setCart] = useState([]);
   const [cartList, setCartList] = useState([]);
@@ -37,9 +37,9 @@ function App() {
   }, [])
 
   useEffect(() => {
-    fetch('http://localhost:9292/orders')
+    fetch('http://localhost:9292/current_order')
     .then(res => res.json())
-    .then((orders) => setOrders(orders))
+    .then((order) => setCurrentOrderId(order.id))
   }, [])
 
   // useEffect(() => {
@@ -48,6 +48,7 @@ function App() {
   //   .then((orderedItems) => setOrderedItems(orderedItems))
   // }, [])
 
+  console.log(cartList)
 
 //Menu back and forth
   function onRestaurantClick(e, restaurant){
@@ -93,43 +94,63 @@ function handleCategoryFilter(categoryFilter){
       return restaurant.rating === parseInt(ratingFilter);
       })
 
+
 //Cart
+console.log(currentOrderId)
 
-
-
-function addToCart(e, id, price){
+function addToCart(id, restaurantId){
+  const itemData = {
+    order_id: currentOrderId,
+    menu_item_id: id,
+  }
+  const orderData = {
+    restaurant_id: restaurantId
+  }
   
   function addCart(newItem){
     setCartList([...cartList, newItem])
   }
 
-  const order_id = 1
-  const menu_item_id = id
-
-  const itemData = {
-    order_id: order_id,
-    menu_item_id: menu_item_id,
-    price: price
+  function createNewOrder(){
+    fetch("http://localhost:9292/orders/new", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+       },
+       body: JSON.stringify(orderData)
+    })
+    .then((r) => r.json())
+    .then((order) =>  setCurrentOrderId(order.id))
   }
-    
-  fetch("http://localhost:9292/items/new",{
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-     },
-     body: JSON.stringify(itemData)
-  })
-  .then((r) => r.json())
-  .then((newItem) =>  addCart(newItem))
+  
+  function createNewItem(){
+    fetch("http://localhost:9292/items/new",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+       },
+       body: JSON.stringify({    order_id: currentOrderId,
+        menu_item_id: id})
+    })
+    .then((r) => r.json())
+    .then((newItem) =>  console.log(newItem))
+  }
+
+  if (currentOrderId.length == 0){
+    // no current order, so we need to first create a new order then add the item to cart
+    createNewOrder()
+    createNewItem()
+  } else {
+ // if an order already is open we just need to add the item to the existing order
+    createNewItem()
+  }
 }
 
-//Delete
-  
+//Delete  
 function handleDeleteItem(itemToDelete){
   const updatedCart = cartList.filter((item) => item.id !== itemToDelete.id)
   setCartList(updatedCart)
 }
-
 
   return (
     <div className="App">
@@ -155,7 +176,7 @@ function handleDeleteItem(itemToDelete){
             )}
         </Route>
         <Route exact path="/cart">
-          <Cart cartList={cartList} handleDeleteItem={handleDeleteItem}/>
+          <Cart cartList={cartList} currentOrderId={currentOrderId} handleDeleteItem={handleDeleteItem}/>
         </Route>
      </Switch>
     </div>
