@@ -38,7 +38,6 @@ function CartItem({id, name, image, quantity, orderId, price, setCartList }) {
       .then((item) => console.log(item));
   }
 
-console.log(price)
   return (
     <Stack direction="horizontal" gap={5} className="justify-content-center">         
       <div>

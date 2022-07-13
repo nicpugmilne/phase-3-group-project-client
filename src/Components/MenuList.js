@@ -32,6 +32,7 @@ function MenuList({menuId, onAddCartClick}){
             price={menu.price}
             category={menu.item.category_id}
             menuitem={menu.item}
+            restaurantId={menu.restaurant_id}
             onAddCartClick={onAddCartClick}
             />
             ))
@@ -47,6 +48,7 @@ function MenuList({menuId, onAddCartClick}){
         price={menu.price}
         category={menu.item.category_id}
         menuitem={menu.item}
+        restaurantId={menu.restaurant_id}
         onAddCartClick={onAddCartClick}
         />
         ))
@@ -62,6 +64,7 @@ function MenuList({menuId, onAddCartClick}){
         price={menu.price}
         category={menu.item.category_id}
         menuitem={menu.item}
+        restaurantId={menu.restaurant_id}
         onAddCartClick={onAddCartClick}
     />
     ))
@@ -77,6 +80,7 @@ function MenuList({menuId, onAddCartClick}){
         price={menu.price}
         category={menu.item.category_id}
         menuitem={menu.item}
+        restaurantId={menu.restaurant_id}
         onAddCartClick={onAddCartClick}
     />
     ))
@@ -92,6 +96,7 @@ function MenuList({menuId, onAddCartClick}){
         price={menu.price}
         category={menu.item.category_id}
         menuitem={menu.item}
+        restaurantId={menu.restaurant_id}
         onAddCartClick={onAddCartClick}
     />
     ))
@@ -107,6 +112,7 @@ function MenuList({menuId, onAddCartClick}){
         price={menu.price}
         category={menu.item.category_id}
         menuitem={menu.item}
+        restaurantId={menu.restaurant_id}
         onAddCartClick={onAddCartClick}
     />
     ))
