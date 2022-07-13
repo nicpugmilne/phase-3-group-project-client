@@ -11,7 +11,6 @@ function MenuCard({name, image, price}){
             <h3>{name}</h3>
             <p>${price}</p>
             <Button type="button" className="btn">Add To Cart</Button>
-    
         </Card>
     )
 }
