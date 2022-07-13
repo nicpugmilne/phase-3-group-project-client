@@ -26,7 +26,7 @@ function MenuList({menuId, onAddCartClick}){
         .map((menu)=>(
             <MenuCard
             key={menu.item.id}
-            id={menu.item.id}
+            id={menu.id}
             name={menu.item.name}
             image={menu.item.item_image_url}
             price={menu.price}
@@ -41,7 +41,7 @@ function MenuList({menuId, onAddCartClick}){
         .map((menu)=>(
         <MenuCard
         key={menu.item.id}
-        id={menu.item.id}
+        id={menu.id}
         name={menu.item.name}
         image={menu.item.item_image_url}
         price={menu.price}
@@ -56,7 +56,7 @@ function MenuList({menuId, onAddCartClick}){
         .map((menu)=>(
         <MenuCard
         key={menu.item.id}
-        id={menu.item.id}
+        id={menu.id}
         name={menu.item.name}
         image={menu.item.item_image_url}
         price={menu.price}
@@ -71,7 +71,7 @@ function MenuList({menuId, onAddCartClick}){
         .map((menu)=>(
         <MenuCard
         key={menu.item.id}
-        id={menu.item.id}
+        id={menu.id}
         name={menu.item.name}
         image={menu.item.item_image_url}
         price={menu.price}
@@ -86,7 +86,7 @@ function MenuList({menuId, onAddCartClick}){
         .map((menu)=>(
         <MenuCard
         key={menu.item.id}
-        id={menu.item.id}
+        id={menu.id}
         name={menu.item.name}
         image={menu.item.item_image_url}
         price={menu.price}
@@ -101,7 +101,7 @@ function MenuList({menuId, onAddCartClick}){
         .map((menu)=>(
         <MenuCard
         key={menu.item.id}
-        id={menu.item.id}
+        id={menu.id}
         name={menu.item.name}
         image={menu.item.item_image_url}
         price={menu.price}

@@ -9,7 +9,7 @@ function MenuCard({name, id, image, price, menuItem, onAddCartClick}){
             <Card.Img variant="top" className='menuCardImage' src={image} width={300} alt="food"/>
             <h4>{name}</h4>
             <p><b>Price: </b>${price}</p>
-            <Button type="button" className="btn" onClick={(e)=> onAddCartClick(e, id)}>Add To Cart</Button>
+            <Button type="button" className="btn" onClick={(e)=> onAddCartClick(e, id, price)}>Add To Cart</Button>
         </Card>
     )
 }
