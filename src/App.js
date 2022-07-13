@@ -21,7 +21,7 @@ function App() {
   const [menuView, setMenuView] = useState(false);
   const [orders, setOrders] = useState([]);
   // // const [orderedItems, setOrderedItems] = useState([]);
-  const [cart, setCart] = useState([]);
+  // const [cart, setCart] = useState([]);
   const [cartList, setCartList] = useState([]);
 
   useEffect(() =>{
@@ -95,11 +95,14 @@ function handleCategoryFilter(categoryFilter){
 
 //Cart
 
-function addToCart(e, id, price){
 
+
+function addToCart(e, id, price){
+  
   function addCart(newItem){
-    setCart([...cart, newItem])
+    setCartList([...cartList, newItem])
   }
+
   const order_id = 1
   const menu_item_id = id
 
@@ -120,7 +123,13 @@ function addToCart(e, id, price){
   .then((newItem) =>  addCart(newItem))
 }
 
-  console.log(cart)
+//Delete
+  
+function handleDeleteItem(itemToDelete){
+  const updatedCart = cartList.filter((item) => item.id !== itemToDelete.id)
+  setCartList(updatedCart)
+}
+
 
   return (
     <div className="App">
@@ -131,7 +140,7 @@ function addToCart(e, id, price){
           {menuView ?(
             <div>
               <MenuFilter  onGoBack={onGoBack} handleCategoryFilter={handleCategoryFilter}/>
-              <MenuList menuId={menuId} onAddCartClick={addToCart}/>
+              <MenuList menuId={menuId} onAddCartClick={addToCart}  />
             </div>
           ): (
             <div className="restaurantPage">
@@ -146,7 +155,7 @@ function addToCart(e, id, price){
             )}
         </Route>
         <Route exact path="/cart">
-          <Cart cartList={cartList}/>
+          <Cart cartList={cartList} handleDeleteItem={handleDeleteItem}/>
         </Route>
      </Switch>
     </div>

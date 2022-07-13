@@ -1,12 +1,13 @@
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Stack from 'react-bootstrap/Stack'
+import { useState } from 'react'
 
-function CartItem({id, name, image, quantity, orderId, price, setCartList }) {
-
+function CartItem({id, name, image, quantity, orderId, price, setCartList, handleDeleteItem }) {
+ 
   function handleQuantityClick(e){
-    if (e.target.name == "minus"){
-      if (quantity == 1){
+    if (e.target.name === "minus"){
+      if (quantity === 1){
         deleteItem()
       } else {
         updateQuantity(quantity-1)
@@ -15,6 +16,8 @@ function CartItem({id, name, image, quantity, orderId, price, setCartList }) {
       updateQuantity(quantity+1)
     } 
   }
+
+
 
   function updateQuantity(updatedQuantity){
     fetch(`http://localhost:9292/orders/${orderId}/ordered_item/${id}/update_quantity`, {
@@ -29,16 +32,17 @@ function CartItem({id, name, image, quantity, orderId, price, setCartList }) {
       .then((r) => r.json())
       .then((updatedItem) => console.log(updatedItem));
   }
+ 
 
   function deleteItem(){
     fetch(`http://localhost:9292/orders/${orderId}/ordered_item/${id}/delete`, {
       method: "DELETE",
     })
       .then((r) => r.json())
-      .then((item) => console.log(item));
+      .then((item) => handleDeleteItem(item));
   }
 
-console.log(price)
+
   return (
     <Stack direction="horizontal" gap={5} className="justify-content-center">         
       <div>
