@@ -15,7 +15,7 @@ function CartItem({id, name, image, quantity, orderId, setCartList, handleDelete
     .then((item) => setPrice(item.price))
   }, [])
  
-  // console.log(menuItemId)
+  // console.log(amount)
 
   function handleQuantityClick(e){
     if (e.target.name === "minus"){
@@ -61,15 +61,17 @@ function CartItem({id, name, image, quantity, orderId, setCartList, handleDelete
       <Col className="m-1">
         <img src={image} className="cart-images"></img>
       </Col>
+
       <Col className='mt-4'><p>{name}</p></Col>
       <Col className='mt-4'><p>${price}</p></Col>
+
       <Col>        
         <ButtonGroup className="m-3">
           <Button name="minus" variant="outline-primary" onClick={handleQuantityClick}>➖</Button>
           <Button>{amount}</Button>
           <Button name="plus" variant="outline-primary" onClick={handleQuantityClick}>➕</Button>
         </ButtonGroup>
-        <Button name="delete" variant="danger" onClick={deleteItem} ><i class="fa fa-trash-o fa-lg"></i></Button>
+        <Button name="delete" variant="danger" onClick={deleteItem} ><i className="fa fa-trash-o fa-lg"></i></Button>
       </Col>
     </Row>
   );
