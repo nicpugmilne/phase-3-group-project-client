@@ -44,7 +44,7 @@ function Cart({cartList, currentOrderId, handleDeleteItem}){
     return (
         <Container className='mt-5'>
                 {items}
-                <Stack direction="horizontal" gap={4} className="justify-content-center mt-5" >
+                <Stack direction="horizontal" gap={3} className="justify-content-center mt-5" >
                     <Button name="cancel" variant="outline-danger" onClick={cancelOrder}>Cancel Order</Button>
                     <Button name="complete" variant="success" onClick={completeOrder}>Complete Order</Button>
                 </Stack>
