@@ -2,7 +2,7 @@ import MenuCard from "./MenuCard"
 import { useState, useEffect } from "react"
 import Row from 'react-bootstrap/Row';
 
-function MenuList({menuId, onAddCartClick}){
+function MenuList({menuId, onAddCartClick, updateCartTotalCost}){
     const [menuList, setMenuList] = useState([]);
 
     useEffect(() =>{
@@ -10,16 +10,6 @@ function MenuList({menuId, onAddCartClick}){
         .then(res => res.json())
         .then((menuList) => setMenuList(menuList))
       }, [menuId])
-
-    // const menuCollection = menuList.map((menu)=>(
-    //     <MenuCard
-    //     key={menu.item.id}
-    //     name={menu.item.name}
-    //     image={menu.item.item_image_url}
-    //     price={menu.price}
-    //     category={menu.item.category_id}
-    //     />
-    //     ))
 
     const specialCollection = menuList
         .filter((menu) => (menu.is_special === true))
@@ -34,6 +24,7 @@ function MenuList({menuId, onAddCartClick}){
             menuitem={menu.item}
             restaurantId={menu.restaurant_id}
             onAddCartClick={onAddCartClick}
+            updateCartTotalCost={updateCartTotalCost}
             />
             ))
 

@@ -10,7 +10,7 @@ function MenuCard({name, id, image, price, menuitem, restaurantId, onAddCartClic
             <Card.Body className='mb-3'>
                 <Card.Title>{name}</Card.Title>
                 <Card.Text><b>Price: </b>${price}</Card.Text>
-                <Button type="button" className="btn" onClick={()=> onAddCartClick(id, restaurantId, menuitem)}>Add To Cart</Button>
+                <Button type="button" className="btn" onClick={()=> onAddCartClick(id, restaurantId, menuitem, price)}>Add To Cart</Button>
             </Card.Body>
         </Card>
     )

@@ -5,7 +5,7 @@ import { useState, useEffect} from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-function CartItem({id, name, image, quantity, orderId, setCartList, handleDeleteItem, menuItemId}) {
+function CartItem({id, name, image, quantity, orderId, handleDeleteItem, menuItemId, updateCartTotalCost}) {
   const [amount, setAmount] = useState(quantity)
   const [price, setPrice] = useState()
 
@@ -24,10 +24,12 @@ function CartItem({id, name, image, quantity, orderId, setCartList, handleDelete
       } else {
         updateQuantity(amount-1)
         setAmount(amount - 1)
+        updateCartTotalCost(-price)
       }
     } else {
       updateQuantity(amount+1)
       setAmount(amount + 1)
+      updateCartTotalCost(price)
     } 
   }
 
@@ -52,7 +54,7 @@ function CartItem({id, name, image, quantity, orderId, setCartList, handleDelete
       method: "DELETE",
     })
       .then((r) => r.json())
-      .then((item) => handleDeleteItem(item));
+      .then((item) => handleDeleteItem(item, (price*amount)));
   }
 
   return (
