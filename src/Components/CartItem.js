@@ -1,12 +1,21 @@
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Stack from 'react-bootstrap/Stack'
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-function CartItem({id, name, image, quantity, orderId, price, setCartList, handleDeleteItem }) {
+function CartItem({id, name, image, quantity, orderId, setCartList, handleDeleteItem, menuItemId }) {
+
+  const [price, setPrice] = useState()
+
+  useEffect(() =>{
+    fetch(`http://localhost:9292/menu_item/${menuItemId}`)
+    .then(res => res.json())
+    .then((price) => setPrice(price.price))
+  }, [])
  
+  // console.log(menuItemId)
   function handleQuantityClick(e){
     if (e.target.name === "minus"){
       if (quantity === 1){
@@ -44,15 +53,15 @@ function CartItem({id, name, image, quantity, orderId, price, setCartList, handl
 
   return (
 
-    <Row className="cart"n lg={4}>         
-      <Col className="m-3">
+    <Row className="cart" lg={6}>         
+      <Col className="m-1">
         <img src={image} className="cart-images"></img>
       </Col>
-      <Col className="m-3">      
+      <Col className="m-4">      
         <p>{name}</p>
-        <p>{price}</p>
       </Col>
-      <Col >        
+      <Col className='mt-4'><p>${price}</p></Col>
+      <Col>        
         <ButtonGroup className="m-3">
           <Button name="minus" variant="outline-primary" onClick={handleQuantityClick}>➖</Button>
           <Button>{quantity}</Button>
