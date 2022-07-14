@@ -48,7 +48,7 @@ function App() {
   //   .then((orderedItems) => setOrderedItems(orderedItems))
   // }, [])
 
-  console.log(cartList)
+  // console.log(cartList)
 
 //Menu back and forth
   function onRestaurantClick(e, restaurant){
@@ -96,19 +96,18 @@ function handleCategoryFilter(categoryFilter){
 
 
 //Cart
-console.log(currentOrderId)
+// console.log(currentOrderId)
 
-function addToCart(id, restaurantId){
-  const itemData = {
-    order_id: currentOrderId,
-    menu_item_id: id,
-  }
+function addToCart(id, restaurantId, menuitem){
+  
   const orderData = {
     restaurant_id: restaurantId
   }
   
   function addCart(newItem){
-    setCartList([...cartList, newItem])
+    const menuItem = {...newItem, item: menuitem}
+    setCartList([...cartList, menuItem])
+    
   }
 
   function createNewOrder(){
@@ -133,13 +132,16 @@ function addToCart(id, restaurantId){
         menu_item_id: id})
     })
     .then((r) => r.json())
-    .then((newItem) =>  console.log(newItem))
+    .then((newItem) => addCart(newItem))
+    // .then((newItem) =>  console.log(newItem))
+    
   }
 
   if (currentOrderId.length == 0){
     // no current order, so we need to first create a new order then add the item to cart
     createNewOrder()
     createNewItem()
+  
   } else {
  // if an order already is open we just need to add the item to the existing order
     createNewItem()

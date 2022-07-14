@@ -11,7 +11,9 @@ const Navbar = () => {
            <Nav.Item>
                 <Link to="/cart" className="nav-link">Cart</Link> 
            </Nav.Item>
+           <hr></hr>
         </Nav>  
+        
     );
 }
 

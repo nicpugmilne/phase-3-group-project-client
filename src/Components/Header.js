@@ -3,10 +3,12 @@ import Row from 'react-bootstrap/Row';
 function Header(){
     return(
         <div className="header">
+            <div className="transparentbox">
             <h1 className="title">Exquisite Edibles</h1>
-            <Row> 
-                <h1><i class="fa fa-shopping-cart"></i></h1>
-            </Row>
+            </div>
+            {/* <Row> 
+                <h1><i className="fa fa-shopping-cart"></i></h1>
+            </Row> */}
         </div>
     )
 }

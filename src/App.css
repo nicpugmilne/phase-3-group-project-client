@@ -67,6 +67,7 @@
   background-image: url("https://burst.shopifycdn.com/photos/flatlay-iron-skillet-with-meat-and-other-food.jpg?width=925&format=pjpg&exif=1&iptc=1");
   background-repeat: no-repeat;
   background-size: cover;
+  
 }
 
 .btn{
@@ -79,8 +80,26 @@
 }
 
 .title{
-  color: white;
-  font-size: 600%;
+  color: rgb(0, 0, 0);
+  font-size: 700%;
   -webkit-text-stroke: 2px black; 
   padding: 10px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+div.transparentbox {
+  opacity: 0.65;
+  border: 1px solid black;
+  background-color: #ffffff;
+  filter: alpha(opacity=40); /* This is for IE8 and other earlier browsers */
+  vertical-align: center;
+  width: 65%;
+  height: 65%;
+  margin: auto;
+ 
+}
+
+div.dropdown{
+  width: 35%;
+  margin: auto;
 }
