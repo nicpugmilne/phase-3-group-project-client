@@ -2,7 +2,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 
-function MenuCard({name, id, image, price, restaurantId, onAddCartClick}){
+function MenuCard({name, id, image, price, menuitem, restaurantId, onAddCartClick}){
 
     return(
         <Card className="menuCard" border="secondary" style={{ width: '20rem' }}>
@@ -10,7 +10,7 @@ function MenuCard({name, id, image, price, restaurantId, onAddCartClick}){
             <Card.Body className='mb-3'>
                 <Card.Title>{name}</Card.Title>
                 <Card.Text><b>Price: </b>${price}</Card.Text>
-                <Button type="button" className="btn" onClick={()=> onAddCartClick(id, restaurantId)}>Add To Cart</Button>
+                <Button type="button" className="btn" onClick={()=> onAddCartClick(id, restaurantId, menuitem)}>Add To Cart</Button>
             </Card.Body>
         </Card>
     )

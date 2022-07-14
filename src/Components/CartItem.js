@@ -5,8 +5,8 @@ import { useState, useEffect} from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-function CartItem({id, name, image, quantity, orderId, setCartList, handleDeleteItem, menuItemId }) {
-
+function CartItem({id, name, image, quantity, orderId, price, setCartList, handleDeleteItem, menuItemId}) {
+  const [amount, setAmount] = useState(quantity)
   const [price, setPrice] = useState()
 
   useEffect(() =>{
@@ -16,15 +16,18 @@ function CartItem({id, name, image, quantity, orderId, setCartList, handleDelete
   }, [])
  
   // console.log(menuItemId)
+
   function handleQuantityClick(e){
     if (e.target.name === "minus"){
-      if (quantity === 1){
+      if (amount === 1){
         deleteItem()
       } else {
-        updateQuantity(quantity-1)
+        updateQuantity(amount-1)
+        setAmount(amount - 1)
       }
     } else {
-      updateQuantity(quantity+1)
+      updateQuantity(amount+1)
+      setAmount(amount + 1)
     } 
   }
 
@@ -39,7 +42,8 @@ function CartItem({id, name, image, quantity, orderId, setCartList, handleDelete
       }),
     })
       .then((r) => r.json())
-      .then((updatedItem) => console.log(updatedItem));
+      .then((quantity) => console.log(quantity))
+      // .then((updatedQuantity) => initializeAmount(updatedQuantity))
   }
  
 
@@ -57,14 +61,12 @@ function CartItem({id, name, image, quantity, orderId, setCartList, handleDelete
       <Col className="m-1">
         <img src={image} className="cart-images"></img>
       </Col>
-      <Col className="m-4">      
-        <p>{name}</p>
-      </Col>
+    
       <Col className='mt-4'><p>${price}</p></Col>
       <Col>        
         <ButtonGroup className="m-3">
           <Button name="minus" variant="outline-primary" onClick={handleQuantityClick}>➖</Button>
-          <Button>{quantity}</Button>
+          <Button>{amount}</Button>
           <Button name="plus" variant="outline-primary" onClick={handleQuantityClick}>➕</Button>
         </ButtonGroup>
         <Button name="delete" variant="danger" onClick={deleteItem} ><i class="fa fa-trash-o fa-lg"></i></Button>

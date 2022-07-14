@@ -5,6 +5,7 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button';
 
 function Cart({cartList, currentOrderId, handleDeleteItem}){
+
     const items = cartList.map((item)=>(
         <CartItem
             key={item.id}
