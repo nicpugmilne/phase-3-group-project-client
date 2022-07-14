@@ -5,7 +5,7 @@ import { useState, useEffect} from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-function CartItem({id, name, image, quantity, orderId, price, setCartList, handleDeleteItem, menuItemId}) {
+function CartItem({id, name, image, quantity, orderId, setCartList, handleDeleteItem, menuItemId}) {
   const [amount, setAmount] = useState(quantity)
   const [price, setPrice] = useState()
 
@@ -15,7 +15,7 @@ function CartItem({id, name, image, quantity, orderId, price, setCartList, handl
     .then((price) => setPrice(price.price))
   }, [])
  
-  // console.log(menuItemId)
+  // console.log(amount)
 
   function handleQuantityClick(e){
     if (e.target.name === "minus"){
@@ -62,14 +62,14 @@ function CartItem({id, name, image, quantity, orderId, price, setCartList, handl
         <img src={image} className="cart-images"></img>
       </Col>
     
-      <Col className='mt-4'><p>${price}</p></Col>
+      <Col className='mt-4'><p>{name}</p><p>${price}</p></Col>
       <Col>        
         <ButtonGroup className="m-3">
           <Button name="minus" variant="outline-primary" onClick={handleQuantityClick}>➖</Button>
           <Button>{amount}</Button>
           <Button name="plus" variant="outline-primary" onClick={handleQuantityClick}>➕</Button>
         </ButtonGroup>
-        <Button name="delete" variant="danger" onClick={deleteItem} ><i class="fa fa-trash-o fa-lg"></i></Button>
+        <Button name="delete" variant="danger" onClick={deleteItem} ><i className="fa fa-trash-o fa-lg"></i></Button>
       </Col>
     </Row>
   );
