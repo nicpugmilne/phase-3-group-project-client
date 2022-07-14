@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (
-        <Nav className="justify-content-center">
+        <Nav justify variant="tabs" className="justify-content-center mb-3" defaultActiveKey="/">
            <Nav.Item>
                 <Link to="/" className="nav-link">Restaurants</Link>    
             </Nav.Item>
