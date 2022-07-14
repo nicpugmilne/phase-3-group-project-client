@@ -1,11 +1,21 @@
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Stack from 'react-bootstrap/Stack'
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
-function CartItem({id, name, image, quantity, orderId, price, handleDeleteItem }) {
+function CartItem({id, name, image, quantity, orderId, price, setCartList, handleDeleteItem, menuItemId}) {
   const [amount, setAmount] = useState(quantity)
+  const [price, setPrice] = useState()
 
+  useEffect(() =>{
+    fetch(`http://localhost:9292/menu_item/${menuItemId}`)
+    .then(res => res.json())
+    .then((price) => setPrice(price.price))
+  }, [])
+ 
+  // console.log(menuItemId)
 
   function handleQuantityClick(e){
     if (e.target.name === "minus"){
@@ -46,24 +56,22 @@ function CartItem({id, name, image, quantity, orderId, price, handleDeleteItem }
   }
 
   return (
-    <Stack direction="horizontal" gap={5} className="justify-content-center">         
-      <div>
+
+    <Row className="cart" lg={6}>         
+      <Col className="m-1">
         <img src={image} className="cart-images"></img>
-      </div>
-      <div>      
-        <p>{name}</p>
-        <p>{price}</p>
-      </div>
-      <div>        
-        <ButtonGroup>
-          <Button name="minus" onClick={handleQuantityClick}><i className="fa fa-minus"></i></Button>
+      </Col>
+    
+      <Col className='mt-4'><p>${price}</p></Col>
+      <Col>        
+        <ButtonGroup className="m-3">
+          <Button name="minus" variant="outline-primary" onClick={handleQuantityClick}>➖</Button>
           <Button>{amount}</Button>
-          <Button name="plus" onClick={handleQuantityClick}><i className="fa fa-plus"></i></Button>
+          <Button name="plus" variant="outline-primary" onClick={handleQuantityClick}>➕</Button>
         </ButtonGroup>
-        <Button name="delete" onClick={deleteItem}>Remove From Cart</Button>
-        <div></div>
-      </div>
-    </Stack>
+        <Button name="delete" variant="danger" onClick={deleteItem} ><i class="fa fa-trash-o fa-lg"></i></Button>
+      </Col>
+    </Row>
   );
 }
 

@@ -5,10 +5,12 @@ function Header(){
         <div className="header">
             <div className="transparentbox">
             <h1 className="title">Exquisite Edibles</h1>
+
             </div>
             {/* <Row> 
                 <h1><i className="fa fa-shopping-cart"></i></h1>
             </Row> */}
+
         </div>
     )
 }

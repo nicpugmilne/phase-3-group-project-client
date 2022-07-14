@@ -5,7 +5,7 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button';
 
 function Cart({cartList, currentOrderId, handleDeleteItem}){
-    // console.log(cartList)
+
     const items = cartList.map((item)=>(
         <CartItem
             key={item.id}
@@ -14,8 +14,8 @@ function Cart({cartList, currentOrderId, handleDeleteItem}){
             name={item.item.name}
             image={item.item.item_image_url}
             quantity={item.quantity}
-            price={item.price}
             handleDeleteItem={handleDeleteItem}
+            menuItemId= {item.menu_item_id}
         />
     ))
 
@@ -42,14 +42,12 @@ function Cart({cartList, currentOrderId, handleDeleteItem}){
     }
       
     return (
-        <Container className='mt-4'>
-            <Stack gap={4} className="col-md-5 mx-auto">
+        <Container className='mt-5'>
                 {items}
-                <Stack direction="horizontal" gap={4} className="justify-content-center">
+                <Stack direction="horizontal" gap={4} className="justify-content-center mt-5" >
                     <Button name="cancel" variant="outline-danger" onClick={cancelOrder}>Cancel Order</Button>
                     <Button name="complete" variant="success" onClick={completeOrder}>Complete Order</Button>
                 </Stack>
-            </Stack>
         </Container>
         )
     }
