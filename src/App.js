@@ -25,11 +25,12 @@ function App() {
   // const [cart, setCart] = useState([]);
   const [cartList, setCartList] = useState([]);
   const [showToast, setToast] = useState(false);
+  const [totalCartCost, setTotalCartCost] = useState();
 
   useEffect(() =>{
       fetch(`http://localhost:9292/ordered_items`)
       .then(res => res.json())
-      .then((items) => setCartList(items))
+      .then((items) => initalizeCart(items))
     }, [])
   
   useEffect(() => {
@@ -51,6 +52,18 @@ function App() {
   // }, [])
 
   // console.log(cartList)
+
+//Initialize cart list and get total cost of items in cart
+function initalizeCart(items){
+  setCartList(items)
+  fetch('http://localhost:9292/current_order_cost')
+  .then(res => res.json())
+  .then((totalCost) => setTotalCartCost(totalCost))
+}
+
+// function updateCartTotalCost(newItemPrice){
+//   setTotalCartCost(totalCartCost + newItemPrice)
+// }
 
 //Menu back and forth
   function onRestaurantClick(e, restaurant){
@@ -96,17 +109,16 @@ function handleCategoryFilter(categoryFilter){
       return restaurant.rating === parseInt(ratingFilter);
       })
 
-
-//Cart
-// console.log(currentOrderId)
-
 //Show toast
 function displayToast(){
   setToast(true)
 }
 
+//Add new items to cart
+
 function addToCart(id, restaurantId, menuitem){
   displayToast()
+
   const orderData = {
     restaurant_id: restaurantId
   }
@@ -140,7 +152,6 @@ function addToCart(id, restaurantId, menuitem){
     })
     .then((r) => r.json())
     .then((newItem) => addCart(newItem))
-    // .then((newItem) =>  console.log(newItem))
     
   }
 
@@ -186,7 +197,7 @@ function handleDeleteItem(itemToDelete){
             )}
         </Route>
         <Route exact path="/cart">
-          <Cart cartList={cartList} currentOrderId={currentOrderId} handleDeleteItem={handleDeleteItem}/>
+          <Cart cartList={cartList} currentOrderId={currentOrderId} handleDeleteItem={handleDeleteItem} totalCartCost={totalCartCost} />
         </Route>
      </Switch>
     </div>
