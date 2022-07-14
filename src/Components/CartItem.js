@@ -5,14 +5,14 @@ import { useState, useEffect} from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-function CartItem({id, name, image, quantity, orderId, price, setCartList, handleDeleteItem, menuItemId}) {
+function CartItem({id, name, image, quantity, orderId, setCartList, handleDeleteItem, menuItemId}) {
   const [amount, setAmount] = useState(quantity)
   const [price, setPrice] = useState()
 
   useEffect(() =>{
     fetch(`http://localhost:9292/menu_item/${menuItemId}`)
     .then(res => res.json())
-    .then((price) => setPrice(price.price))
+    .then((item) => setPrice(item.price))
   }, [])
  
   // console.log(menuItemId)
@@ -57,11 +57,11 @@ function CartItem({id, name, image, quantity, orderId, price, setCartList, handl
 
   return (
 
-    <Row className="cart" lg={6}>         
+    <Row className="cart">         
       <Col className="m-1">
         <img src={image} className="cart-images"></img>
       </Col>
-    
+      <Col className='mt-4'><p>{name}</p></Col>
       <Col className='mt-4'><p>${price}</p></Col>
       <Col>        
         <ButtonGroup className="m-3">

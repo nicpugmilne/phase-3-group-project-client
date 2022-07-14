@@ -108,7 +108,6 @@ div.dropdown{
 }
 
 .cart{
-  max-width:'100%';
   display: flex;
   justify-content: center;
 }
