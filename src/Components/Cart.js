@@ -3,11 +3,8 @@ import Container from 'react-bootstrap/Container';
 import { useState, useEffect } from "react"
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 function Cart({cartList, currentOrderId, handleDeleteItem}){
-    console.log(cartList)
     const items = cartList.map((item)=>(
         <CartItem
             key={item.id}
@@ -16,8 +13,8 @@ function Cart({cartList, currentOrderId, handleDeleteItem}){
             name={item.item.name}
             image={item.item.item_image_url}
             quantity={item.quantity}
-            price={item.price}
             handleDeleteItem={handleDeleteItem}
+            menuItemId= {item.menu_item_id}
         />
     ))
 
