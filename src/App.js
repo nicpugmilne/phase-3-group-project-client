@@ -78,17 +78,25 @@ function initalizeCart(items){
   }
 
 //Filters
+ const [cuisineName, setCuisineName] = useState("All")
+ const [priceValue, setPriceValue] = useState("All")
+ const [ratingValue, setRatingValue] = useState("All")
 
 function handleCuisineFilter(cuisineFilter){
-  setCuisineFilter(cuisineFilter)
-  console.log(cuisineFilter)
+  setCuisineFilter(cuisineFilter.name)
+  setCuisineName(cuisineFilter.innerHTML)
 }
 
+
 function handlePriceFilter(priceFilter){
-  setPriceFilter(priceFilter)
+  setPriceFilter(priceFilter.name)
+  setPriceValue(priceFilter.innerHTML)
 }
 function handleRatingFilter(ratingFilter){
-  setRatingFilter(ratingFilter)
+  setRatingFilter(ratingFilter.name)
+  setRatingValue(ratingFilter.innerHTML)
+  console.log(priceFilter.innerHTML)
+  console.log(ratingFilter.name)
 }
 
 function handleCategoryFilter(categoryFilter){
@@ -106,7 +114,7 @@ function handleCategoryFilter(categoryFilter){
     })
     .filter((restaurant) => {
       if (ratingFilter === "All") return true;
-      return restaurant.rating === parseInt(ratingFilter);
+      return restaurant.rating === Math.floor((ratingFilter));
       })
 
 //Show toast
@@ -166,10 +174,14 @@ function addToCart(id, restaurantId, menuitem){
   }
 }
 
-//Delete  
+// Delete  
 function handleDeleteItem(itemToDelete){
   const updatedCart = cartList.filter((item) => item.id !== itemToDelete.id)
   setCartList(updatedCart)
+}
+
+function deleteCart(){
+  setCartList([])
 }
 
   return (
@@ -189,7 +201,11 @@ function handleDeleteItem(itemToDelete){
             <RestaurantFilter
                 handlePriceFilter={handlePriceFilter}
                 handleCuisineFilter={handleCuisineFilter}
-                handleRatingFilter={handleRatingFilter} />
+                handleRatingFilter={handleRatingFilter}
+                cuisineName={cuisineName} 
+                priceValue={priceValue}
+                ratingValue={ratingValue}
+                />
             <RestaurantList 
                 restaurantsToDisplay={restaurantsToDisplay}
                 onRestaurantClick={onRestaurantClick}/>
@@ -197,7 +213,7 @@ function handleDeleteItem(itemToDelete){
             )}
         </Route>
         <Route exact path="/cart">
-          <Cart cartList={cartList} currentOrderId={currentOrderId} handleDeleteItem={handleDeleteItem} totalCartCost={totalCartCost} />
+          <Cart cartList={cartList} currentOrderId={currentOrderId} handleDeleteItem={handleDeleteItem}  deleteCart={deleteCart} totalCartCost={totalCartCost} />
         </Route>
      </Switch>
     </div>

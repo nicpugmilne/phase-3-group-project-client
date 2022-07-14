@@ -3,14 +3,18 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useState } from 'react';
 
-function RestaurantFilter({handlePriceFilter, handleCuisineFilter, handleRatingFilter}){
+function RestaurantFilter({handlePriceFilter, priceValue, handleCuisineFilter, cuisineName, handleRatingFilter, ratingValue}){
 
    return(
         <Container>
             <Row>
             <Col>
-                <DropdownButton title="Filter By Cuisine" onClick={(e)=> handleCuisineFilter(e.target.name)}>
+                <DropdownButton 
+                    title={cuisineName} 
+                    onClick={(e)=> handleCuisineFilter(e.target)}
+                    >
                     <Dropdown.Item name="All">All</Dropdown.Item>
                     <Dropdown.Item name="4">American</Dropdown.Item>
                     <Dropdown.Item name="3">Indian</Dropdown.Item>
@@ -30,7 +34,7 @@ function RestaurantFilter({handlePriceFilter, handleCuisineFilter, handleRatingF
             </select> */}
             </Col>
             <Col>
-            <DropdownButton title="Filter By Price" onClick={(e)=> handlePriceFilter(e.target.name)}>
+            <DropdownButton title={priceValue} onClick={(e)=> handlePriceFilter(e.target)}>
                     <Dropdown.Item name="All">All</Dropdown.Item>
                     <Dropdown.Item name="1">$</Dropdown.Item>
                     <Dropdown.Item name="2">$$</Dropdown.Item>
@@ -50,7 +54,7 @@ function RestaurantFilter({handlePriceFilter, handleCuisineFilter, handleRatingF
             </select> */}
             </Col>
             <Col>
-            <DropdownButton title="Filter By Rating" onClick={(e)=> handleRatingFilter(e.target.name)}>
+            <DropdownButton title={ratingValue} onClick={(e)=> handleRatingFilter(e.target)}>
                     <Dropdown.Item name="All">All</Dropdown.Item>
                     <Dropdown.Item name="1">★</Dropdown.Item>
                     <Dropdown.Item name="2">★★</Dropdown.Item>

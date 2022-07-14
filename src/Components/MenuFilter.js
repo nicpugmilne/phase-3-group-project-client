@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col'
 function MenuFilter({onGoBack, handleCategoryFilter}){
     return(
         <Row>
-            <Col>
+            {/* <Col>
                 <DropdownButton title="Filter By Category" onClick={(e)=> handleCategoryFilter(e.target.name)}>
                     <Dropdown.Item name="All">All</Dropdown.Item>
                     <Dropdown.Item name="1">Appetizers</Dropdown.Item>
@@ -16,7 +16,7 @@ function MenuFilter({onGoBack, handleCategoryFilter}){
                     <Dropdown.Item name="4">Dessert</Dropdown.Item>
                     <Dropdown.Item name="5">Drinks</Dropdown.Item>
                 </DropdownButton>
-            </Col>
+            </Col> */}
             {/* <h2>Filter By Category</h2>
             <select name="category" id="category">
                 <option value="all">All</option>

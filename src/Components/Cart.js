@@ -4,8 +4,8 @@ import { useState, useEffect } from "react"
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button';
 
-function Cart({cartList, currentOrderId, handleDeleteItem, totalCartCost}){
-
+function Cart({cartList, currentOrderId, handleDeleteItem, deleteCart, totalCartCost}){
+  
     const items = cartList.map((item)=>(
         <CartItem
             key={item.id}
@@ -19,12 +19,13 @@ function Cart({cartList, currentOrderId, handleDeleteItem, totalCartCost}){
         />
     ))
 
+
     function cancelOrder(){
         fetch(`http://localhost:9292/orders/${currentOrderId}/delete`, {
             method: "DELETE",
           })
             .then((r) => r.json())
-            .then((item) => console.log(item));
+            .then((items) => deleteCart(items));
     }
 
     function completeOrder(){
@@ -38,7 +39,8 @@ function Cart({cartList, currentOrderId, handleDeleteItem, totalCartCost}){
             }),
           })
             .then((r) => r.json())
-            .then((updatedItem) => console.log(updatedItem));
+            .then((items) => deleteCart(items));
+            
     }
       
     return (
