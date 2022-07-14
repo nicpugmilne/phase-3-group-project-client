@@ -10,6 +10,7 @@ import MenuFilter from './Components/MenuFilter';
 import RestaurantList from './Components/RestaurantList';
 import RestaurantFilter from './Components/RestaurantFilter';
 import Cart from './Components/Cart';
+import AddToCartToast from './Components/AddToCartToast';
 
 function App() {
   const [restaurants, setRestaurants] = useState([]);
@@ -23,6 +24,7 @@ function App() {
   // // const [orderedItems, setOrderedItems] = useState([]);
   // const [cart, setCart] = useState([]);
   const [cartList, setCartList] = useState([]);
+  const [showToast, setToast] = useState(false);
 
   useEffect(() =>{
       fetch(`http://localhost:9292/ordered_items`)
@@ -98,8 +100,13 @@ function handleCategoryFilter(categoryFilter){
 //Cart
 // console.log(currentOrderId)
 
+//Show toast
+function displayToast(){
+  setToast(true)
+}
+
 function addToCart(id, restaurantId, menuitem){
-  
+  displayToast()
   const orderData = {
     restaurant_id: restaurantId
   }
@@ -156,14 +163,15 @@ function handleDeleteItem(itemToDelete){
 
   return (
     <div className="App">
-     <Header />
-     <Navbar />
-     <Switch>
+      <AddToCartToast showToast={showToast} setToast={setToast}/>
+      <Header />
+      <Navbar />
+      <Switch>
         <Route exact path="/">
           {menuView ?(
             <div>
               <MenuFilter  onGoBack={onGoBack} handleCategoryFilter={handleCategoryFilter}/>
-              <MenuList menuId={menuId} onAddCartClick={addToCart}  />
+              <MenuList menuId={menuId} onAddCartClick={addToCart}/>
             </div>
           ): (
             <div className="restaurantPage">
