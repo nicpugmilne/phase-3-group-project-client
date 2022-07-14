@@ -4,9 +4,8 @@ import { useState, useEffect } from "react"
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button';
 
-function Cart({cartList, currentOrderId, handleDeleteItem, deleteCart}){
-
-    
+function Cart({cartList, currentOrderId, handleDeleteItem, deleteCart, totalCartCost}){
+  
     const items = cartList.map((item)=>(
         <CartItem
             key={item.id}
@@ -50,6 +49,7 @@ function Cart({cartList, currentOrderId, handleDeleteItem, deleteCart}){
                 <Stack direction="horizontal" gap={3} className="justify-content-center mt-5" >
                     <Button name="cancel" variant="outline-danger" onClick={cancelOrder}>Cancel Order</Button>
                     <Button name="complete" variant="success" onClick={completeOrder}>Complete Order</Button>
+                    <div>Total Cost: ${totalCartCost}</div>
                 </Stack>
         </Container>
         )
