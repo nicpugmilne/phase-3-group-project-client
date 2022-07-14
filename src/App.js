@@ -25,7 +25,7 @@ function App() {
   // const [cart, setCart] = useState([]);
   const [cartList, setCartList] = useState([]);
   const [showToast, setToast] = useState(false);
-  const [totalCartCost, setTotalCartCost] = useState();
+  const [totalCartCost, setTotalCartCost] = useState(0);
 
   useEffect(() =>{
       fetch(`http://localhost:9292/ordered_items`)
@@ -45,14 +45,6 @@ function App() {
     .then((order) => setCurrentOrderId(order.id))
   }, [])
 
-  // useEffect(() => {
-  //   fetch('http://localhost:9292/ordered_items')
-  //   .then(res => res.json())
-  //   .then((orderedItems) => setOrderedItems(orderedItems))
-  // }, [])
-
-  // console.log(cartList)
-
 //Initialize cart list and get total cost of items in cart
 function initalizeCart(items){
   setCartList(items)
@@ -61,9 +53,9 @@ function initalizeCart(items){
   .then((totalCost) => setTotalCartCost(totalCost))
 }
 
-// function updateCartTotalCost(newItemPrice){
-//   setTotalCartCost(totalCartCost + newItemPrice)
-// }
+function updateCartTotalCost(newItemPrice){
+  setTotalCartCost(totalCartCost + newItemPrice)
+}
 
 //Menu back and forth
   function onRestaurantClick(e, restaurant){
@@ -122,19 +114,19 @@ function displayToast(){
   setToast(true)
 }
 
-//Add new items to cart
+//Add new items to cart (client and server)
 
-function addToCart(id, restaurantId, menuitem){
+function addToCart(id, restaurantId, menuitem, price){
   displayToast()
+  updateCartTotalCost(price)
 
   const orderData = {
     restaurant_id: restaurantId
   }
   
-  function addCart(newItem){
+  function addCart(newItem, price){
     const menuItem = {...newItem, item: menuitem}
     setCartList([...cartList, menuItem])
-    
   }
 
   function createNewOrder(){
@@ -174,14 +166,16 @@ function addToCart(id, restaurantId, menuitem){
   }
 }
 
-// Delete  
-function handleDeleteItem(itemToDelete){
+// Delete from client side 
+function handleDeleteItem(itemToDelete, price){
   const updatedCart = cartList.filter((item) => item.id !== itemToDelete.id)
   setCartList(updatedCart)
+  updateCartTotalCost(-price)
 }
 
 function deleteCart(){
   setCartList([])
+  setTotalCartCost(0)
 }
 
   return (
@@ -194,7 +188,7 @@ function deleteCart(){
           {menuView ?(
             <div>
               <MenuFilter  onGoBack={onGoBack} handleCategoryFilter={handleCategoryFilter}/>
-              <MenuList menuId={menuId} onAddCartClick={addToCart}/>
+              <MenuList menuId={menuId} onAddCartClick={addToCart} updateCartTotalCost={updateCartTotalCost}/>
             </div>
           ): (
             <div className="restaurantPage">
@@ -213,7 +207,7 @@ function deleteCart(){
             )}
         </Route>
         <Route exact path="/cart">
-          <Cart cartList={cartList} currentOrderId={currentOrderId} handleDeleteItem={handleDeleteItem}  deleteCart={deleteCart} totalCartCost={totalCartCost} />
+          <Cart cartList={cartList} currentOrderId={currentOrderId} handleDeleteItem={handleDeleteItem}  deleteCart={deleteCart} totalCartCost={totalCartCost} updateCartTotalCost={updateCartTotalCost}/>
         </Route>
      </Switch>
     </div>
