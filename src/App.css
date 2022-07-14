@@ -71,11 +71,12 @@
 
 .btn{
   padding: 10px;
+  margin-bottom: 12px;
 }
 
 .cart-images{
-  max-width: 7vh;
-  max-height: 5vh;
+  max-width: 12vh;
+  max-height: 10vh;
 }
 
 .title{
@@ -83,4 +84,10 @@
   font-size: 600%;
   -webkit-text-stroke: 2px black; 
   padding: 10px;
+}
+
+.cart{
+  max-width:'100%';
+  display: flex;
+  justify-content: center;
 }

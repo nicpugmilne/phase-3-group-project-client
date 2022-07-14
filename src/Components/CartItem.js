@@ -2,6 +2,8 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Stack from 'react-bootstrap/Stack'
 import { useState } from 'react'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 function CartItem({id, name, image, quantity, orderId, price, setCartList, handleDeleteItem }) {
  
@@ -16,8 +18,6 @@ function CartItem({id, name, image, quantity, orderId, price, setCartList, handl
       updateQuantity(quantity+1)
     } 
   }
-
-
 
   function updateQuantity(updatedQuantity){
     fetch(`http://localhost:9292/orders/${orderId}/ordered_item/${id}/update_quantity`, {
@@ -43,24 +43,24 @@ function CartItem({id, name, image, quantity, orderId, price, setCartList, handl
   }
 
   return (
-    <Stack direction="horizontal" gap={5} className="justify-content-center">         
-      <div>
+
+    <Row className="cart"n lg={4}>         
+      <Col className="m-3">
         <img src={image} className="cart-images"></img>
-      </div>
-      <div>      
+      </Col>
+      <Col className="m-3">      
         <p>{name}</p>
         <p>{price}</p>
-      </div>
-      <div>        
-        <ButtonGroup>
-          <Button name="minus" onClick={handleQuantityClick}><i class="fa fa-minus"></i></Button>
+      </Col>
+      <Col >        
+        <ButtonGroup className="m-3">
+          <Button name="minus" variant="outline-primary" onClick={handleQuantityClick}>➖</Button>
           <Button>{quantity}</Button>
-          <Button name="plus" onClick={handleQuantityClick}><i class="fa fa-plus"></i></Button>
+          <Button name="plus" variant="outline-primary" onClick={handleQuantityClick}>➕</Button>
         </ButtonGroup>
-        <Button name="delete" onClick={deleteItem}>Remove From Cart</Button>
-        <div></div>
-      </div>
-    </Stack>
+        <Button name="delete" variant="danger" onClick={deleteItem} ><i class="fa fa-trash-o fa-lg"></i></Button>
+      </Col>
+    </Row>
   );
 }
 
