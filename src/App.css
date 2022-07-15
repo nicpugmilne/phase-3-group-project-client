@@ -113,3 +113,7 @@ div.dropdown{
   display: flex;
   justify-content: center;
 }
+
+#total-cost{
+  font-size: 20px;
+}

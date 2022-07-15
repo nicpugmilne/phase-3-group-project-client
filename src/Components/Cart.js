@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import { useState, useEffect } from "react"
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button';
+import { Row } from 'react-bootstrap';
 
 function Cart({cartList, currentOrderId, handleDeleteItem, deleteCart, totalCartCost, updateCartTotalCost}){
   
@@ -47,10 +48,10 @@ function Cart({cartList, currentOrderId, handleDeleteItem, deleteCart, totalCart
     return (
         <Container className='mt-5'>
                 {items}
-                <Stack direction="horizontal" gap={3} className="justify-content-center mt-5" >
+                <div id="total-cost" className='mt-3'>Total Cost: ${totalCartCost}</div>
+                <Stack direction="horizontal" gap={3} className="justify-content-center mt-4" >
                     <Button name="cancel" variant="outline-danger" onClick={cancelOrder}>Cancel Order</Button>
                     <Button name="complete" variant="success" onClick={completeOrder}>Complete Order</Button>
-                    <div>Total Cost: ${totalCartCost}</div>
                 </Stack>
         </Container>
         )

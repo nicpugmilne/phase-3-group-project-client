@@ -42,7 +42,7 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:9292/current_order')
     .then(res => res.json())
-    .then((order) => setCurrentOrderId(order.id))
+    .then((order) => checkForExistingOrder(order))
   }, [])
 
 //Initialize cart list and get total cost of items in cart
@@ -55,6 +55,26 @@ function initalizeCart(items){
 
 function updateCartTotalCost(newItemPrice){
   setTotalCartCost(totalCartCost + newItemPrice)
+}
+
+function checkForExistingOrder(order){
+  if (order == null){
+    createNewOrder()
+  } else {setCurrentOrderId(order.id)}
+}
+
+function createNewOrder(){
+  fetch("http://localhost:9292/orders/new", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+     },
+     body: JSON.stringify({
+      restaurant_id: 1
+    })
+  })
+  .then((r) => r.json())
+  .then((order) =>  setCurrentOrderId(order.id))
 }
 
 //Menu back and forth
@@ -78,7 +98,6 @@ function handleCuisineFilter(cuisineFilter){
   setCuisineFilter(cuisineFilter.name)
   setCuisineName(cuisineFilter.innerHTML)
 }
-
 
 function handlePriceFilter(priceFilter){
   setPriceFilter(priceFilter.name)
@@ -119,28 +138,12 @@ function displayToast(){
 function addToCart(id, restaurantId, menuitem, price){
   displayToast()
   updateCartTotalCost(price)
-
-  const orderData = {
-    restaurant_id: restaurantId
-  }
-  
+ 
   function addCart(newItem, price){
     const menuItem = {...newItem, item: menuitem}
     setCartList([...cartList, menuItem])
   }
 
-  function createNewOrder(){
-    fetch("http://localhost:9292/orders/new", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-       },
-       body: JSON.stringify(orderData)
-    })
-    .then((r) => r.json())
-    .then((order) =>  setCurrentOrderId(order.id))
-  }
-  
   function createNewItem(){
     fetch("http://localhost:9292/items/new",{
       method: "POST",
@@ -176,7 +179,7 @@ function handleDeleteItem(itemToDelete, price){
 function deleteCart(){
   setCartList([])
   setTotalCartCost(0)
-  console.log(cartList)
+  createNewOrder()
 }
 
   return (
