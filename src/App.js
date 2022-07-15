@@ -176,6 +176,7 @@ function handleDeleteItem(itemToDelete, price){
 function deleteCart(){
   setCartList([])
   setTotalCartCost(0)
+  console.log(cartList)
 }
 
   return (

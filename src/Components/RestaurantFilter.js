@@ -11,6 +11,7 @@ function RestaurantFilter({handlePriceFilter, priceValue, handleCuisineFilter, c
         <Container>
             <Row>
             <Col>
+                <h4>Filter By Cuisine</h4>
                 <DropdownButton 
                     title={cuisineName} 
                     onClick={(e)=> handleCuisineFilter(e.target)}
@@ -34,6 +35,7 @@ function RestaurantFilter({handlePriceFilter, priceValue, handleCuisineFilter, c
             </select> */}
             </Col>
             <Col>
+            <h4>Filter By Price</h4>
             <DropdownButton title={priceValue} onClick={(e)=> handlePriceFilter(e.target)}>
                     <Dropdown.Item name="All">All</Dropdown.Item>
                     <Dropdown.Item name="1">$</Dropdown.Item>
@@ -54,6 +56,7 @@ function RestaurantFilter({handlePriceFilter, priceValue, handleCuisineFilter, c
             </select> */}
             </Col>
             <Col>
+            <h4>Filter By Rating</h4>
             <DropdownButton title={ratingValue} onClick={(e)=> handleRatingFilter(e.target)}>
                     <Dropdown.Item name="All">All</Dropdown.Item>
                     <Dropdown.Item name="1">★</Dropdown.Item>
